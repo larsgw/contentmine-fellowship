@@ -193,7 +193,7 @@ This is the page containing the data. Still no suppinfo. It does still download 
 
 From peerJ. Finally, supplementary information. First images, and some `.csv` files. It downloaded `fulltext.xml` twice, not sure if they were the same file.
 
-    > quickscrape --url http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29 --scraper ../../journal-scrapers/scrapers/peerj.json --output BMC1746-4269-2-29 --outformat bibjson
+    > quickscrape --url http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29 --scraper ../../journal-scrapers/scrapers/bmc.json --output BMC1746-4269-2-29 --outformat bibjson
     
     info: quickscrape 0.4.7 launched with...
     info: - URL: http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29
@@ -203,6 +203,72 @@ From peerJ. Finally, supplementary information. First images, and some `.csv` fi
     info: urls to scrape: 1
     info: processing URL: http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29
 
-From BMC. Seems to have a lot of suppinfo (2x `.pdf`, 9x `.ppt`). Seemed to fail silently, took at least 10 minutes, aborted.
+From BMC. It has a lot of suppinfo (2x `.pdf`, 9x `.ppt`). Seemed to fail silently, took at least 10 minutes, I aborted it.
+
+Reproduced two days later, and three days later with different articles and on a different computer. After a while, I changed bmc.json from
+
+    {
+        "url": "www\\.biomedcentral\\.com",
+    [...]
+
+to
+
+    {
+        "url": "biomedcentral\\.com",
+    [...]
+
+because the articles that I used (I am not sure if this is true for all articles) are stored on subdomains (`ethnobiomed.biomedcentral.com`, `bmcgenet.biomedcentral.com`, etc.). Pretty obvious, but it took a while before I looked into the scrapers. This works, as you can see below:
+
+    > quickscrape --url http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29 --scraper ../../journal-scrapers/scrapers/bmc.json --output BMC1746-4269-2-29 --outformat bibjson
+    
+    info: quickscrape 0.4.7 launched with...
+    info: - URL: http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29
+    info: - Scraper: /home/larsw/public_html/cm-repo/Interview_task/journal-scrapers/scrapers/bmc.json
+    info: - Rate limit: 3 per minute
+    info: - Log level: info
+    info: urls to scrape: 1
+    info: processing URL: http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29
+    info: [scraper]. URL rendered. http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29.
+    info: [scraper]. download started. fulltext.html.
+    info: [scraper]. download started. fulltext.pdf.
+    info: URL processed: captured 12/19 elements (7 captures failed)
+    info: all tasks completed
+
+Unfortunately, the suppinfo was not captured. Apparently, the whole setup of the BMC website has changed, which also caused the suppinfo to not be downloaded. I made a quick patch, which I posted [here](https://github.com/ContentMine/journal-scrapers/pull/45). With this, it looked like this:
+
+    > quickscrape --url http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29 --scraper ../../journal-scrapers/scrapers/bmc.json --output BMC1746-4269-2-29_newscraper2 --outformat bibjson
+    
+    info: quickscrape 0.4.7 launched with...
+    info: - URL: http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29
+    info: - Scraper: /home/larsw/public_html/cm-repo/Interview_task/journal-scrapers/scrapers/bmc.json
+    info: - Rate limit: 3 per minute
+    info: - Log level: info
+    info: urls to scrape: 1
+    info: processing URL: http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29
+    info: [scraper]. URL rendered. http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29.
+    info: [scraper]. download started. fulltext.html.
+    info: [scraper]. download started. 13002_2006_41_MOESM2_ESM.pdf.
+    info: [scraper]. download started. 13002_2006_41_MOESM3_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_41_MOESM5_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_41_MOESM4_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_41_MOESM6_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_41_MOESM8_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_41_MOESM7_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_41_MOESM1_ESM.pdf.
+    info: [scraper]. download started. 13002_2006_41_MOESM9_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_41_MOESM10_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig1_HTML.jpg.
+    info: [scraper]. download started. 13002_2006_41_MOESM11_ESM.ppt.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig3_HTML.jpg.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig4_HTML.jpg.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig2_HTML.jpg.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig5_HTML.jpg.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig7_HTML.jpg.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig8_HTML.jpg.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig9_HTML.jpg.
+    info: [scraper]. download started. fulltext.pdf.
+    info: [scraper]. download started. 13002_2006_Article_41_Fig6_HTML.jpg.
+    info: URL processed: captured 18/18 elements (0 captures failed)
+    info: all tasks completed
 
 I have not put the resulting files in my repository because they seem pretty useless and you can get them reproducing the steps, if you have the right version of `quickscrape` etc.
