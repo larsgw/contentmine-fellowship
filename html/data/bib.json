@@ -1,0 +1,50 @@
+{
+  "title": "Gitksan medicinal plants-cultural choice and efficacy",
+  "link": [
+    {
+      "type": "fulltext_html",
+      "url": "http://ethnobiomed.biomedcentral.com/articles/10.1186/1746-4269-2-29"
+    },
+    {
+      "type": "fulltext_pdf",
+      "url": "http://ethnobiomed.biomedcentral.com/track/pdf/10.1186/1746-4269-2-29?site=http://ethnobiomed.biomedcentral.com"
+    }
+  ],
+  "publisher": {
+    "name": "BioMed Central"
+  },
+  "journal": {
+    "volume": "2",
+    "issue": "1",
+    "firstpage": "1"
+  },
+  "sections": {
+    "abstract": {
+      "text": "The use of plants for healing by any cultural group is integrally related to local concepts of the nature of disease, the nature of plants, and the world view of the culture. The physical and chemical properties of the plants themselves also bear on their selection by people for medicines, as does the array of plants available for people to choose from. I examine use of medicinal plants from a \"biobehavioral\" perspective to illuminate cultural selection of plants used for medicine by the Gitksan of northwestern British Columbia, Canada. Consultant consensus, \"intercultural consensus\", independent use of the same plants by other cultural groups, and phytochemistry and bioassay results from the literature, were employed in analysis of probable empirical efficacy of plant uses. 70% of 37 Gitksan medicinal plants were used similarly by other cultures where direct diffusion is not known to have occurred; eleven plants, including the eight most frequently mentioned medicinal plants, also show active phytochemicals or bioassays indicating probable physiologically based therapeutic effects. Analysis of intercultural consensus revealed that the majority of cultures in the British Columbia region within the plant ranges use the same plants, or closely related species, in similar ways. The rigor of this analysis is effected by the lack of consistent data on all taxa of interest for all cultures within the region."
+    },
+    "description": {
+      "text": "The use of plants for healing by any cultural group is integrally related to local concepts of the nature of disease, the nature of plants, and the world view of the culture. The physical and chemical properties of the plants themselves also bear on their selection by people for medicines, as does the array of plants available for people to choose from. I examine use of medicinal plants from a \"biobehavioral\" perspective to illuminate cultural selection of plants used for medicine by the Gitksan of northwestern British Columbia, Canada. Consultant consensus, \"intercultural consensus\", independent use of the same plants by other cultural groups, and phytochemistry and bioassay results from the literature, were employed in analysis of probable empirical efficacy of plant uses. 70% of 37 Gitksan medicinal plants were used similarly by other cultures where direct diffusion is not known to have occurred; eleven plants, including the eight most frequently mentioned medicinal plants, also show active phytochemicals or bioassays indicating probable physiologically based therapeutic effects. Analysis of intercultural consensus revealed that the majority of cultures in the British Columbia region within the plant ranges use the same plants, or closely related species, in similar ways. The rigor of this analysis is effected by the lack of consistent data on all taxa of interest for all cultures within the region."
+    }
+  },
+  "date": {},
+  "identifier": [
+    {
+      "type": "doi",
+      "id": "10.1186/1746-4269-2-29"
+    }
+  ],
+  "license": [
+    {
+      "raw": "This article is published under license to BioMed Central Ltd. This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/2.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited."
+    }
+  ],
+  "copyright": [
+    "2006 Johnson; licensee BioMed Central Ltd."
+  ],
+  "log": [
+    {
+      "date": "2016-06-22T17:04:06+02:00",
+      "event": "scraped by quickscrape v0.4.7"
+    }
+  ]
+}
