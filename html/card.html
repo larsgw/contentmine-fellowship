@@ -14,7 +14,6 @@ article {
 }
 
 .card {
-  max-height: 166px;
   position: relative;
   padding:16px;
   width:300px;
@@ -26,9 +25,13 @@ article {
   color: rgba(0,0,0,.87);
   font-family: Roboto;
   
-  -webkit-transition: max-height 0.3s ease;
-  -moz-transition: max-height 0.3s ease;
-  transition: max-height 0.3s ease;
+  -webkit-transition: max-height 0.5s ease;
+  -moz-transition: max-height 0.5s ease;
+  transition: max-height 0.5s ease;
+}
+
+.card:not(:focus) {
+  max-height: 166px;
 }
 
 .card:focus {
