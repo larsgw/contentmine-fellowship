@@ -1,0 +1,328 @@
+Commands dump from project 16h-c03.
+
+2016-08-17 23:33 UTC+2
+
+larsw@debian:~/public_html/cm-repo$ mkdir data
+
+larsw@debian:~/public_html/cm-repo$ cd data/
+
+larsw@debian:~/public_html/cm-repo/data$ mkdir "0"
+
+larsw@debian:~/public_html/cm-repo/data$ cd 0/
+
+larsw@debian:~/public_html/cm-repo/data/0$ cd ../../
+
+larsw@debian:~/public_html/cm-repo$ mkdir commands
+
+larsw@debian:~/public_html/cm-repo$ cd commands/
+
+larsw@debian:~/public_html/cm-repo/commands$ nano 16h-c.txt
+
+2016-08-18 02:32 UTC+2
+
+larsw@debian:~$ cd public_html/cm-repo/data/0/
+
+larsw@debian:~/public_html/cm-repo/data/0$ getpapers --api eupmc -q Pinus -n
+info: Searching using eupmc API
+info: Running in no-execute mode, so nothing will be downloaded
+info: Found 3951 open access results
+
+larsw@debian:~/public_html/cm-repo/data/0$ getpapers --api eupmc -q Pinus -o . -k 200 -x
+info: Searching using eupmc API
+info: Found 3951 open access results
+info: Limiting to 200 hits
+Retrieving results [==============================] 100% (eta 0.0s)
+info: Done collecting results
+info: Saving result metadata
+info: Full EUPMC result metadata written to eupmc_results.json
+info: Individual EUPMC result metadata records written
+info: Extracting fulltext HTML URL list (may not be available for all articles)
+info: Fulltext HTML URL list written to eupmc_fulltext_html_urls.txt
+warn: Article with pmcid "PMC4967841" was not Open Access (therefore no XML)
+warn: Article with pmcid "PMC4114966" was not Open Access (therefore no XML)
+info: Got XML URLs for 198 out of 200 results
+info: Downloading fulltext XML files
+Downloading files [==============================] 100% (198/198) [11.0s elapsed, eta 0.0]
+info: All downloads succeeded!
+
+larsw@debian:~/public_html/cm-repo/data/0$ ls -l | grep -c ^d
+200
+
+larsw@debian:~/public_html/cm-repo/data/0$ getpapers --api eupmc -q Abies -n
+info: Searching using eupmc API
+info: Running in no-execute mode, so nothing will be downloaded
+info: Found 1715 open access results
+
+larsw@debian:~/public_html/cm-repo/data/0$ getpapers --api eupmc -q Abies -o . -k 200 -x
+info: Searching using eupmc API
+info: Found 1715 open access results
+info: Limiting to 200 hits
+Retrieving results [==============================] 100% (eta 0.0s)
+info: Done collecting results
+info: Saving result metadata
+info: Full EUPMC result metadata written to eupmc_results.json
+info: Individual EUPMC result metadata records written
+info: Extracting fulltext HTML URL list (may not be available for all articles)
+info: Fulltext HTML URL list written to eupmc_fulltext_html_urls.txt
+warn: Article with pmcid "PMC4963410" was not Open Access (therefore no XML)
+info: Got XML URLs for 199 out of 200 results
+info: Downloading fulltext XML files
+Downloading files [==============================] 100% (199/199) [11.3s elapsed, eta 0.0]
+info: All downloads succeeded!
+
+larsw@debian:~/public_html/cm-repo/data/0$ rm -r ./*
+
+larsw@debian:~/public_html/cm-repo/data/0$ getpapers --api eupmc -q 'Abies OR Pinus OR Picea' -n
+info: Searching using eupmc API
+info: Running in no-execute mode, so nothing will be downloaded
+info: Found 1366009 open access results
+larsw@debian:~/public_html/cm-repo/data/0$ getpapers --api eupmc -q 'Abies OR Pinus OR Picea' -o . -k 250 -x
+info: Searching using eupmc API
+info: Found 1366009 open access results
+info: Limiting to 250 hits
+Retrieving results [==============================] 100% (eta 0.0s)
+info: Done collecting results
+info: Saving result metadata
+info: Full EUPMC result metadata written to eupmc_results.json
+info: Individual EUPMC result metadata records written
+info: Extracting fulltext HTML URL list (may not be available for all articles)
+info: Fulltext HTML URL list written to eupmc_fulltext_html_urls.txt
+warn: Article with pmcid "PMC4963410" was not Open Access (therefore no XML)
+info: Got XML URLs for 249 out of 250 results
+info: Downloading fulltext XML files
+Downloading files [==============================] 100% (249/249) [13.3s elapsed, eta 0.0]
+info: All downloads succeeded!
+
+larsw@debian:~/public_html/cm-repo/data/0$ norma --project . -i fulltext.xml -o scholarly.html --transform nlm2html
+.....UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: page-range: 24–26
+UNKNOWN: page-range: 48
+UNKNOWN: page-range: 50
+..UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBostrichidae
+UNKNOWN: volume-series: sezione 1
+UNKNOWN: volume-series: 2
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+UNKNOWN: overline: STAR
+..UNKNOWN: sec-meta: Taxon classificationAnimaliaJulidaJulidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaJulidaJulidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaJulidaJulidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaJulidaJulidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaJulidaNemasomatidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaChordeumatidaDiplomaragnidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaChordeumatidaDiplomaragnidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaChordeumatidaDiplomaragnidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaChordeumatidaDiplomaragnidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaChordeumatidaDiplomaragnidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaChordeumatidaAnthroleucosomatidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaChordeumatidaAnthroleucosomatidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaChordeumatidaAltajellidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaPolydesmidaPolydesmidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaPolydesmidaPolydesmidae
+..UNKNOWN: sec-meta: Taxon classificationPlantaeApialesApiaceae
+.UNKNOWN: textual-form: PLOSS = Stock-PC30 − Stock-P
+UNKNOWN: textual-form: Stock-PC30 = CPc × BDc × 30 ÷ 10
+UNKNOWN: textual-form: Stock-P = Stock-PO + Stock-PAC30
+UNKNOWN: textual-form: Stock-PO = CPo × BDo × Do ÷ 10
+UNKNOWN: textual-form: Stock-PAC30 = (CPA × BDA × DA + CPC × BDC × (30 − DA)) ÷ 10
+.UNKNOWN: mmultiscripts: Δ13
+UNKNOWN: mprescripts: 
+UNKNOWN: none: 
+.UNKNOWN: page-range: 219–243, 245–258
+....UNKNOWN: nlm-citation: SaleemMNazirMAliMSHussainHLeeYSRiazNAntimicrobial natural products: an update on future antibiotic drug candidatesNat Prod Rep20102723825420111803
+UNKNOWN: nlm-citation: RiosJLRecioMCMedicinal plants and antimicrobial activityJ Ethnopharmacol2005100808415964727
+UNKNOWN: nlm-citation: DominMAHighly virulent pathogens-a post antibiotic eraBr J Theatre Nurs?1998814189677888
+UNKNOWN: nlm-citation: CowanMMPlant products as antimicrobial agentsClin Microbiol Rev19991256458210515903
+UNKNOWN: nlm-citation: Hames-KocabasEEYesil-SeliktasOIsletenMVardar-SukanFAntimicrobial activity of pine bark extract and assesment of potential application in cooked red meatGida200833123127
+UNKNOWN: nlm-citation: HosseinzadehHKhooeiARKhashayarmaneshZMotamed-ShariatyVAntiurolithiatic activity of Pinus eldarica medw: fruits aqueous extract in ratsUrol J2010723223721170851
+UNKNOWN: nlm-citation: Fallah HuseiniHMehrzadiSGhaznaviHTajallizadehkhoobYFakhrzadehHEffects of Pinus eldarica Medw. Nut extract on blood glucose and cholesterol levels in hypercholesterolemic alloxan-induced diabetic ratsJ Med Plant201316874
+UNKNOWN: nlm-citation: BolandghamatSMoghimiAIranshahiMEffects of ethanolic extract of pine needles (Pinus eldarica Medw.) on reserpine-induced depression-like behavior in male Wistar ratsPharmacogn Mag2011724825321969797
+UNKNOWN: nlm-citation: ZolfaghariBIravaniSEssential oil constituents of the bark of Pinus pinaster from IranJ Essent Oil Bear Pl201215348351
+UNKNOWN: nlm-citation: LeeJHYangHYLeeHSHongSKChemical composition and antimicrobial activity of essential oil from cones of Pinus koraiensisJ Microbiol Biotechnol20081849750218388468
+UNKNOWN: nlm-citation: VigoECepedaAGualilloOPerez-FernandezRIn vitro anti-inflammatory activity of Pinus sylvestris and Plantago lanceolata extracts: effect on inducible NOS, COX-1, COX-2 and their products in J774A.1 murine macrophagesJ Pharm Pharmacol20055738339115807995
+UNKNOWN: nlm-citation: TorrasMACFauraCASchonlauFRohdewaldPAntimicrobial activity of Pycnogenol®Phytother Res20051964764816161029
+UNKNOWN: nlm-citation: LodhiaMHBhattKRThakerVSAntibacterial activity of essential oils from palmarosa, evening primrose, lavender and tuberoseIndian J Pharm Sci20097113413620336210
+UNKNOWN: nlm-citation: GolshaniZDawoodiVAnti-Pseudomonal activity of leaf extracts of Myrtaceae plants against B-lactamase-producing strainsZahedan J Res Med Sci2014163337
+UNKNOWN: nlm-citation: IravaniSZolfaghariBPhytochemical analysis of Pinus eldarica barkRes Pharm Sci2014924325025657795
+UNKNOWN: nlm-citation: ZellaguiAGherrafNLadjelSHameurlaineSChemical composition and antibacterial activity of the essential oils from Launaea resedifolia LOrg Med Chem Lett201222422373506
+UNKNOWN: nlm-citation: AronsonNESandersJWMoranKAIn harm's way: infections in deployed American military forcesClin Infect Dis2006431045105116983619
+UNKNOWN: nlm-citation: KoehnkeAFriedrichREAntibiotic Discovery in the age of structural biology - a comprehensive overview with special reference to development of drugs for the treatment of Pseudomonas aeruginosa infectionIn Vivo20152916116725792642
+UNKNOWN: nlm-citation: PotronAPoirelLNordmannPEmerging broad-spectrum resistance in Pseudomonas aeruginosa and Acinetobacter baumannii: Mechanisms and epidemiologyInt J Antimicrob Agents20152456858525857949
+UNKNOWN: nlm-citation: Abi-AyadMAbi-AyadFZLazzouniHARebiahiSAAntibacterial activity of Pinus halepensis essential oil from Algeria(Tlemcen)J Nat Prod Plant Resour201113336
+UNKNOWN: nlm-citation: AhnJGruIUMustaphaAEffects of plant extracts on microbial growth, color change, and lipid oxidation in cooked beefFood Microbiol20072471416943089
+UNKNOWN: nlm-citation: HammerKACarsonCFRileyTVAntimicrobial activity of essential oils and other plant extractsJ Appl Microbiol19998698599010438227
+UNKNOWN: nlm-citation: ApetreiCLTuchilusCAprotosoaieACOpreaAMalterudKEMironAChemical, antioxidant and antimicrobial investigations of Pinus cembra L. bark and needlesMolecules2011167773778822143542
+UNKNOWN: nlm-citation: IravaniSZolfaghariBGreen synthesis of silver nanoparticles using Pinus eldarica bark extractBiomed Res Int 20132013ID 639725
+UNKNOWN: nlm-citation: LiYYFengJZhangXLCuiYYPine bark extracts: nutraceutical, pharmacological, and toxicological evaluationJ Pharmacol Exp Ther201535391625597308
+UNKNOWN: nlm-citation: KotanRKordaliSCakirAScreening of antibacterial activities of twenty-one oxygenated monoterpenesZ Naturforsch C20076250751317913064
+UNKNOWN: nlm-citation: Rivas da SilvaACLopesPMBarros de AzevedoMMCostaDCAlvianoCSAlvianoDSBiological activities of alpha-pinene and beta-pinene enantiomersMolecules2012176305631622634841
+UNKNOWN: nlm-citation: TrombettaDCastelliFSarpietroMGVenutiVCristaniMDanieleCMechanisms of antibacterial action of three monoterpenesAntimicrob Agents Chemother2005492474247815917549
+UNKNOWN: nlm-citation: DolaraPCorteBGhelardiniCPuglieseAMCerbaiEMenichettiSLocal anaesthetic, antibacterial and antifungal properties of sesquiterpenes from myrrhPlanta Med20006635635810865454
+UNKNOWN: nlm-citation: InoueYShiraishiAHadaTHiroseKHamashimaHShimadaJThe antibacterial effects of terpene alcohols on Staphylococcus aureus and their mode of actionFEMS Microbiol Lett200423732533115321680
+UNKNOWN: nlm-citation: FengSZengWLuoFZhaoJYangZSunQAntibacterial activity of organic acids in aqueous extracts from pine needles (Pinus massoniana Lamb)Food Sci Biotechnol2010193541
+UNKNOWN: nlm-citation: PoliteoOSkocibusicMMaravicARuscicMMilosMChemical composition and antimicrobial activity of the essential oil of endemic Dalmatian black pine (Pinus nigra ssp. dalmatica)Chem Biodivers2011854054721404437
+UNKNOWN: nlm-citation: Nasrollahzadeh-SabetMTabaei-AghdaeiSImaniAInvestigate the antibacterial effect of black pine essence (Pinus nigra) against the bacteria E. coli, Staphylococcus aureus and Enterococcus faecalis in three province of Ardabil, Gilan and TehranEurop J Zoologic Res201327681
+UNKNOWN: nlm-citation: SakagamiHYoshiharaMFujimakiMWadaCKomatsuNNakashimaHEffect of pine seed shell extract on microbial and viral infectionIn Vivo1992613161627738
+UNKNOWN: nlm-citation: ZulqarnainRahimAAhmadKUllahFUllahHNishanUIn vitro antibacterial activity of selected medicinal plants from lower HimalayasPak J Pharm Sci20152858158725730791
+UNKNOWN: nlm-citation: Oh-HaraTSakagamiHFKawazoeYFKaiyaTFKomatsuNFOhsawaNFAntimicrobial spectrum of lignin-related pine cone extracts of Pinus parviflora Sieb. et ZuccIn Vivo199047122129479
+UNKNOWN: nlm-citation: SonibareOOOlakunleKChemical composition and antibacterial activity of the essential oil of Pinus caribaea from NigeriaAfr J Biotechnol2008724622464
+.UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraAnthribidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraAnthribidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraAnthribidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraNemonychidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBrentidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraBrachyceridae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraCurculionidae
+.UNKNOWN: alt-text: Table
+...UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraGyrinidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraGyrinidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraGyrinidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraHaliplidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: sec-meta: Taxon classificationAnimaliaColeopteraDytiscidae
+UNKNOWN: alt-text: Table
+..!UNKNOWN: array: LSClarge single copySSCsmall single copyIRinverted repeatMLmaximum likelihood
+
+larsw@debian:~/public_html/cm-repo/data/0$ ami2-species --project . -i scholarly.html --sp.species --sp.type genus
+..........................
+
+larsw@debian:~/public_html/cm-repo/data/0$ ami2-species --project . -i scholarly.html --sp.species --sp.type binomial
+..........................
+
+larsw@debian:~/public_html/cm-repo/data/0$ ami2-species --project . -i scholarly.html --sp.species --sp.type genussp
+..........................
+
+larsw@debian:~/public_html/cm-repo/data/0$ ami2-gene --project . -i scholarly.html --g.gene --g.type human
+..........................
+
+larsw@debian:~/public_html/cm-repo/data/0ami2-word --project . --w.words wordFrequencies --w.stopwords ~/public_html/cm-repo/Interview_task/stopwords.txt 
+0    [main] WARN  org.xmlcml.ami2.wordutil.WordSetWrapper  - Cannot read stopword stream: /home/larsw/public_html/cm-repo/Interview_task/stopwords.txt
+.........................47526 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./PMC4963410
+!47526 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!47719 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./target
+!47719 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!.47720 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./ursus
+!47720 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!
+
+larsw@debian:~/public_html/cm-repo/data/0$ ami2-word --project . --w.words wordFrequencies --w.stopwords stopwords.txt 
+0    [main] DEBUG org.xmlcml.ami2.wordutil.WordSetWrapper  - symbol expands to: /org/xmlcml/ami2/wordutil/stopwords.txt
+.........................36389 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./PMC4963410
+!36389 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!36548 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./target
+!36548 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!.36549 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./ursus
+!36549 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+
+larsw@debian:~/public_html/cm-repo/data/0$ ami2-sequence --project . --filter file\(\*\*/results.xml\) -o sequencesfiles.xml
+.........................
+
+larsw@debian:~/public_html/cm-repo/data/0$ ls -l | grep -c ^d
+250
+
+larsw@debian:~/public_html/cm-repo/data/0$ find */results/species/genus/results.xml | wc -l
+170
+
+larsw@debian:~/public_html/cm-repo/data/0$ find */results/species/genussp/results.xml | wc -l
+68
+
+larsw@debian:~/public_html/cm-repo/data/0$ find */results/species/binomial/results.xml | wc -l
+244
+
+larsw@debian:~/public_html/cm-repo/data/0$ find */results/gene/human/results.xml | wc -l
+54
+
+larsw@debian:~/public_html/cm-repo/data/0$ find */results/word/frequencies/results.xml | wc -l
+249
