@@ -333,3 +333,10 @@ larsw@debian:~/public_html/cm-repo$ node js/jsonMaker_0.js -p data/0/ -o data -f
   76: [DEBUG] data/0/ data data.json DEBUG
  132: [INFO ] Saving output to ./data/data.json
  136: [INFO ] Saving output succeeded!
+ 
+larsw@debian:~/public_html/cm-repo$ node js/jsonMaker_0.js -p data/0/ -o data -f data.json -v debug
+  77: [INFO ] Parsing CTree project in folder: data/0/
+  78: [INFO ] Outputting to folder: data
+  79: [INFO ] Outputting to file: data.json
+ 178: [INFO ] Saving output to ./data/data.json
+ 180: [INFO ] Saving output succeeded!
