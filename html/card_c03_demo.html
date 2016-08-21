@@ -173,13 +173,21 @@
 }
     </style>
     <style>
-
+body {
+  white-space:nowrap;
+  overflow-x:scroll;
+  overflow-y:hidden;
+}
+    
 article, article ~ div {
   border:1px solid black;
   margin:35px;
   display:inline-block;
   background:#e8e8e8;
-  float:left;
+  
+  white-space:initial;
+  max-height:calc(100vh - 86px);
+  overflow-y:scroll;
 }
 
 .card {

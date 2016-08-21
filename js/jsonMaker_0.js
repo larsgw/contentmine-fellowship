@@ -76,9 +76,9 @@ var project = program.project
   , output  = program.output
   , outfile = program.outfile
 
-custom.console.info( 'Parsing CTree project in folder: ' + project )
-custom.console.info( 'Outputting to folder: ' + output )
-custom.console.info( 'Outputting to file: ' + outfile )
+custom.console.info( 'Parsing CProject in folder: ' + project )
+custom.console.info( 'Result will be saved in folder: ' + output )
+custom.console.info( 'Result will be saved in file: ' + outfile )
 
 // Validate arguments
 if ( !project ) {
@@ -177,7 +177,7 @@ function getAMIResults ( directory ) {
 }
 
 try {
-  custom.console.info( 'Saving output to ./' + output + '/' + outfile )
+  custom.console.info( 'Saving output to ' + output + '/' + outfile )
   fs.writeFileSync( [ output, outfile ].join( '/' ), JSON.stringify( outputData, null, 2 ) )
   custom.console.info( 'Saving output succeeded!' )
 } catch ( e ) {
