@@ -21,8 +21,8 @@ program
 	  'amount of information to log ' +
           '(debug, info, log, warn, error)',
 	  function ( a ) { return a.toUpperCase() },
-          //'INFO')
-	  'DEBUG')
+          'INFO')
+	  //'DEBUG')
   .parse(process.argv);
 
 if ( !process.argv.slice(2).length )
@@ -130,12 +130,9 @@ for ( var dirIndex = 0; dirIndex < directories.length; dirIndex++ ) {
 
 try {
   custom.console.info( 'Saving output to ./' + output + '/' + outfile )
-  
   fs.writeFileSync( [ output, outfile ].join( '/' ), JSON.stringify( articles ) )
-  
   custom.console.info( 'Saving output succeeded!' )
 } catch ( e ) {
-  
   custom.console.error( 'Saving output failed!', e.toString() )
 }
 

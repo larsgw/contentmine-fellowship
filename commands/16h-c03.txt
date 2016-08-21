@@ -326,3 +326,10 @@ larsw@debian:~/public_html/cm-repo/data/0$ find */results/gene/human/results.xml
 
 larsw@debian:~/public_html/cm-repo/data/0$ find */results/word/frequencies/results.xml | wc -l
 249
+
+2016-08-21 03:44 UTC+2
+
+larsw@debian:~/public_html/cm-repo$ node js/jsonMaker_0.js -p data/0/ -o data -f data.json -v debug
+  76: [DEBUG] data/0/ data data.json DEBUG
+ 132: [INFO ] Saving output to ./data/data.json
+ 136: [INFO ] Saving output succeeded!
