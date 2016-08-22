@@ -1,6 +1,5 @@
 // Include
 var program = require( 'commander' )
-  , clear   = require( 'clear'     )
   , fs      = require( 'fs'        )
   , xmldoc  = require( 'xmldoc'    )
 
