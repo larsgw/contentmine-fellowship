@@ -1,0 +1,34 @@
+<html>
+  <head></head>
+  <body>
+  
+    <div id="vis"></div>
+    
+    <div style="display:none" id="angles"></div>
+  
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="../js/cloud.js"></script>
+    <script>
+      var tags;
+      
+      window.onload = function(){
+	
+	$.get( '../data/data.json', function(data){
+	  
+	  var frequencies = data.articles["PMC3830773"].AMIResults.frequencies;
+	  
+	  tags = frequencies.map(function(v){
+	    return { key: v.word, value: v.count }
+	  })
+	  
+	  generate()
+	  
+	});
+ 
+      }
+      
+      //parseText('Test')
+    </script>
+  </body>
+</html>

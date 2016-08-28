@@ -4,6 +4,8 @@ I myself had some extra data, but these were unused by cards_c03.html. Therefore
 
 Below is a list of commands to get the .json file, with explanation and expected output.
 
+## Make directory
+
     $ mkdir data
 
 Make a directory for your data. You can name this anything, if you are consistent.
@@ -11,6 +13,8 @@ Make a directory for your data. You can name this anything, if you are consisten
     $ cd data/
 
 Go to that directory.
+
+## Make CProject
 
     /data$ getpapers --api eupmc -q 'Abies OR Pinus OR Picea' -n
     info: Searching using eupmc API
@@ -58,7 +62,31 @@ Sequence the results. This makes it easier for the program to fetch the files.
 
 Go back to the root folder of the project.
 
-To transform the data to JSON you need the [jsonMaker_0.js](https://github.com/larsgw/contentmine-fellowship/blob/master/js/jsonMaker_0.js) and NodeJS. It's dependencies are:
+## Convert CProject to JSON
+
+To transform the data to JSON you need [ctj.js](https://github.com/larsgw/ctj/blob/master/ctj.js) and NodeJS. Its dependencies are:
+
+ * commander
+ * fs
+ * xmldoc
+ * colors
+ * progress
+
+Now, you can run it. [Docs](https://github.com/larsgw/ctj/blob/master/README.md).
+     
+    $ node path/to/ctj.js -p data -o . -c genus,binomial
+      116: [INFO ] Parsing CProject in folder: data
+      117: [INFO ] Result will be saved in folder: .
+      118: [INFO ] AMI results of types: genus, binomial will be saved.
+           [==============================] Parsing directory 250/250: PMC4964460 - ETA 0.0s
+      248: [INFO ] Saving output...
+      256: [INFO ] Saving output succeeded!
+
+If it gets an error, [raise an issue](https://github.com/larsgw/ctj/issues/new).
+
+## Convert CProject to JSON (old)
+
+To transform the data to JSON you need the [jsonMaker_0.js](https://github.com/larsgw/contentmine-fellowship/blob/master/js/jsonMaker_0.js) and NodeJS. Its dependencies are:
 
  * commander
  * clear
