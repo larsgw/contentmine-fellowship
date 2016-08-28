@@ -1,0 +1,107 @@
+<html>
+  <head></head>
+  <body>
+  
+    <div id="vis"></div>
+    
+    <div style="display:none" id="angles"></div>
+  
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="../js/cloud.js"></script>
+    <script>
+/*var d3 = require("d3"),
+    cloud = require("../");*/
+var cloud = d3.layout.cloud;
+
+var fill = d3.scale.category20();
+
+var layout = cloud()
+    .size([500, 500])
+    .padding(1)
+    .rotate(function() { return ~~(Math.random() * 2) * 90; })
+    .font("Impact")
+    .fontSize(function(d) { return d.size; })
+    .on("end", draw);
+
+function draw(words) {
+  d3.select("body").append("svg")
+      .attr("width", layout.size()[0])
+      .attr("height", layout.size()[1])
+    .append("g")
+      .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+    .selectAll("text")
+      .data(words)
+    .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .style("fill", function(d, i) { return fill(i); })
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+}
+
+$.get( '../data/data.json', function( data, err ){
+	  
+  var frequencies = data.articles[ "PMC3830773" ].AMIResults.frequencies
+    , words       = frequencies.map( function ( v ) {
+    return { text: v.word, size: v.count }
+  } )
+  
+  console.log(words)
+  
+  layout.words(words).start();
+  
+});
+    
+    </script>
+    <!--<script>
+      function draw(words) {
+	d3.select("body").append("svg")
+	    .attr("width", cloud.size()[0])
+	    .attr("height", cloud.size()[1])
+	  .append("g")
+	    .attr("transform", "translate(" + cloud.size()[0] / 2 + "," + cloud.size()[1] / 2 + ")")
+	  .selectAll("text")
+	    .data(words)
+	  .enter().append("text")
+	    .style("font-size", function(d) { return d.value + "px"; })
+	    .style("font-family", function(d) { d.font })
+	    .style("fill", function(d, i) { return fill(i); })
+	    .attr("text-anchor", "middle")
+	    .style("transform", function(d) {
+	      return "translate(" + [d.x, d.y].join('px,') + "px) rotate(" + d.rotate + "deg)";
+	    })
+	    .text(function(d) { return console.log(d)||d.key; });
+      }
+      
+      var fill  = d3.scale.category20(),
+	  cloud = d3.layout.cloud()
+		    .size( [ 1600, 1000 ] )
+		    .font( 'Roboto' )
+		    .fontSize( function ( d ) { return Math.log( d.value ) } )
+		    .spiral( 'archimedean' )
+		    .padding( 5 )
+		    .rotate( function() { var arr = [-90,0,90]; return arr[ Math.floor( Math.random() * arr.length ) ]; } )
+		    .on( 'end', draw )      
+      
+      window.onload = function(){
+	
+	$.get( '../data/data.json', function( data, err ){
+	  
+	  var frequencies = data.articles[ "PMC3830773" ].AMIResults.frequencies
+	    , words       = frequencies.map( function ( v ) {
+	    return { key: v.word, value: v.count }
+	  } )
+	  
+	  cloud.words( words )
+	       .start()
+	  
+	});
+ 
+      }
+    </script>-->
+  </body>
+</html>
