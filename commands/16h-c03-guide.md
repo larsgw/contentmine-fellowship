@@ -45,13 +45,16 @@ Query the eupmc API for data with the `getpapers` command. Again, the query (`-q
 
 Transform `fulltext.xml` to `scholarly.html` with the `norma` command.
 
+    /data$ ami2-word --project . -i scholarly.html --w.words wordFrequencies --w.stopwords stopwords.txt 
+    ..........................
+    
     /data$ ami2-species --project . -i scholarly.html --sp.species --sp.type genus
     ..........................
 
     /data$ ami2-species --project . -i scholarly.html --sp.species --sp.type binomial
     ..........................
 
-Extract `genus` and `binomial` with the `ami` command. **Note:** Two commands, both necessary.
+Extract `frequencies`, `genus` and `binomial` with the `ami` command. **Note:** Multiple commands, all necessary.
 
     /data$ ami2-sequence --project . --filter file\(\*\*/results.xml\) -o sequencesfiles.xml
     .........................
@@ -74,10 +77,10 @@ To transform the data to JSON you need [ctj.js](https://github.com/larsgw/ctj/bl
 
 Now, you can run it. [Docs](https://github.com/larsgw/ctj/blob/master/README.md).
      
-    $ node path/to/ctj.js -p data -o . -c genus,binomial
+    $ node path/to/ctj.js -p data -o . -c frequencies,genus,binomial
       116: [INFO ] Parsing CProject in folder: data
       117: [INFO ] Result will be saved in folder: .
-      118: [INFO ] AMI results of types: genus, binomial will be saved.
+      118: [INFO ] AMI results of types: frequencies, genus, binomial will be saved.
            [==============================] Parsing directory 250/250: PMC4964460 - ETA 0.0s
       248: [INFO ] Saving output...
       256: [INFO ] Saving output succeeded!
