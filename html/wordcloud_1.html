@@ -2,13 +2,14 @@
   <head></head>
   <body>
   
-    <div id="vis"></div>
-    
-    <div style="display:none" id="angles"></div>
-  
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
+    
+    <!--
+    -->
     <script src="../js/cloud.js"></script>
+    <!-- End -->
+    
     <script>
 /*var d3 = require("d3"),
     cloud = require("../");*/
@@ -55,53 +56,6 @@ $.get( '../data/data.json', function( data, err ){
   layout.words(words).start();
   
 });
-    
     </script>
-    <!--<script>
-      function draw(words) {
-	d3.select("body").append("svg")
-	    .attr("width", cloud.size()[0])
-	    .attr("height", cloud.size()[1])
-	  .append("g")
-	    .attr("transform", "translate(" + cloud.size()[0] / 2 + "," + cloud.size()[1] / 2 + ")")
-	  .selectAll("text")
-	    .data(words)
-	  .enter().append("text")
-	    .style("font-size", function(d) { return d.value + "px"; })
-	    .style("font-family", function(d) { d.font })
-	    .style("fill", function(d, i) { return fill(i); })
-	    .attr("text-anchor", "middle")
-	    .style("transform", function(d) {
-	      return "translate(" + [d.x, d.y].join('px,') + "px) rotate(" + d.rotate + "deg)";
-	    })
-	    .text(function(d) { return console.log(d)||d.key; });
-      }
-      
-      var fill  = d3.scale.category20(),
-	  cloud = d3.layout.cloud()
-		    .size( [ 1600, 1000 ] )
-		    .font( 'Roboto' )
-		    .fontSize( function ( d ) { return Math.log( d.value ) } )
-		    .spiral( 'archimedean' )
-		    .padding( 5 )
-		    .rotate( function() { var arr = [-90,0,90]; return arr[ Math.floor( Math.random() * arr.length ) ]; } )
-		    .on( 'end', draw )      
-      
-      window.onload = function(){
-	
-	$.get( '../data/data.json', function( data, err ){
-	  
-	  var frequencies = data.articles[ "PMC3830773" ].AMIResults.frequencies
-	    , words       = frequencies.map( function ( v ) {
-	    return { key: v.word, value: v.count }
-	  } )
-	  
-	  cloud.words( words )
-	       .start()
-	  
-	});
- 
-      }
-    </script>-->
   </body>
 </html>
