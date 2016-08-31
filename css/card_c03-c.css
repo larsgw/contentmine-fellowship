@@ -8,14 +8,14 @@ html {
 
 body {
   position:absolute;
-  top:72px;left:0;right:0;bottom:16px;
-  margin:0;
+  top:64px;left:0;right:0;bottom:16px;
+  margin:0;padding-top:16px;
 }
 
 body > header {
   position:fixed;
   top:0;left:0;right:0;
-  height:56px;
+  height:64px;
   background-color:#607D8B;
   box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }
@@ -60,15 +60,16 @@ body > main {
       float:left;
       width:33.3%;
       height:100%;
-      vertical-align: top;
+      vertical-align:top;
       overflow-y:scroll;
+      padding-bottom:16px;
     }
 
 .card {
   position: relative;
-  padding:16px;margin:16px 1px 16px 8px;
+  padding:16px;margin:16px 1px 0 8px;
   
-  border-bottom:1px solid rgba(0,0,0,.12);
+/*   border-bottom:1px solid rgba(0,0,0,.12); */
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
@@ -85,6 +86,9 @@ body > main {
   -moz-transition-property:max-height, background-color;
   -ms-transition-property:max-height, background-color;
   transition-property:max-height, background-color;
+  
+  z-index:-1;
+  position:relative;
 }
 
   .card:focus {
@@ -93,10 +97,10 @@ body > main {
   }
   
               .card       main { max-height: 13.7em; }
-              .card:focus main { max-height: 2000px; }
+              .card:focus main { max-height:  500px;overflow-y:scroll; }
     
     #articles .card       main { max-height: 12.7em; }
-    #articles .card:focus main { max-height: 2000px; }
+    #articles .card:focus main { max-height:  500px; }
 
 .card img {
   display:none;
@@ -200,12 +204,44 @@ body > main > article > section.column-reverse {
 }
 
 .card {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -moz-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}*/
+  -webkit-box-flex: 1 0;
+  -webkit-flex: 1 0;
+  -moz-box-flex: 1 0;
+  -ms-flex: 1 0;
+  flex: 1 0;
+}
+
+/* Scrolling shadows */
+
+body > main > article > section {
+  background:
+    linear-gradient(#e8e8e8 90%, rgba(255,255,255,0)),
+    linear-gradient(rgba(255,255,255,0), #e8e8e8 10%) 0 100%,
+    
+    radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+    radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+  background:
+    linear-gradient(#e8e8e8 90%, rgba(255,255,255,0)),
+    linear-gradient(rgba(255,255,255,0), #e8e8e8 10%) 0 100%,
+    
+    radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+    radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 16px, 100% 16px, 100% 16px, 100% 16px;
+  background-attachment: local, local, scroll, scroll;
+  
+  i-need-legal-parentheses-for-my-editor:();
+}
+
+/* Special scrollbar */
+body > main > article > section::-webkit-scrollbar-button { width:7px;height:16px; }
+body > main > article > section::-webkit-scrollbar-thumb {
+  background-color:rgba(0,0,0,.3);
+  background-clip: padding-box;
+  border:solid transparent;
+  border-width:0 2px;
+  border-radius: 0px;
+}
 
 /* Boring, more or less default styling */
 
@@ -217,12 +253,12 @@ body > main > article > section.column-reverse {
 }
 
 ::-webkit-scrollbar { width: 7px;height: 7px; }
-::-webkit-scrollbar-button { width:7px;height:16px; }
+::-webkit-scrollbar-button { width:7px;height:7px; }
 ::-webkit-scrollbar-thumb {
   background-color:rgba(0,0,0,.3);
   background-clip: padding-box;
-  border:solid transparent;
-  border-width:0 2px;
+  border: solid transparent;
+  border-width: 2px;
   border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover { background-color:rgba(0,0,0,.5); }

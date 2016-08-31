@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Card prototype</title>
+    
+    <!-- Filter -->
+    <style>*{}</style>
+    
+    <!-- Fonts -->
+<!--     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300&subset=latin,greek,latin-ext' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700&subset=latin,greek,latin-ext" rel="stylesheet">
+    
+    <!-- Main -->
+    <link href="../css/card_c03-c.css" rel="stylesheet">
+  </head>
+  <body>
+    
+    <header></header>
+    
+    <main>
+      <header>
+	<span>Articles</span>
+	<span>Genus</span>
+	<span>Species</span>
+      </header>
+      
+      <article>
+	<section id="articles"></section>
+	<section id="genera"></section>
+	<section id="species"></section>
+      </article>
+    </main>
+  
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--     <script type="text/javascript" src="https://larsgw.github.io/citation.js/src/Citation-0.1.js"></script> -->
+    <script type="text/javascript">
+
+var publisherIcon = {
+  'Frontiers in plant science':'https://api-journal.frontiersin.org/Areas/Header/Content/Images/thin-header-logo.png',
+  'Frontiers in zoology':'https://api-journal.frontiersin.org/Areas/Header/Content/Images/thin-header-logo.png',
+  
+  'PloS one':'https://plos.org/images/favicon.ico'
+}
+
+var articles = 50
+  , genera   = 50
+  , binomial = 50
+  
+  , getdata
+
+var stylesheets = {
+  filter: document.styleSheets[ 0 ]
+}
+
+function filter ( value, prop ) {
+  var prop = prop || 'articles';
+  stylesheets.filter.deleteRule( 0 )
+  stylesheets.filter.insertRule( 
+    '.card:not([data-' + prop + '~="' + value + '"]){' +
+      'max-height:0;' +
+      'margin-top:0;' +
+      'margin-bottom:0;' +
+      'padding:0;' +
+    '}'
+  , 0 )
+}
+
+$(window).on('load',function(){
+  
+  $.get( 'data/c03-a.json', function ( data ) {
+    
+    getdata = data;
+    
+    $( '#articles' ).append( Object.keys( data.articles ).slice( 0, articles ).map( function ( v ) {
+      var article = data.articles[ v ]
+      
+      return (
+	'<div class="card" tabindex="-1" data-articles="' +
+	  v +
+	'">' +
+	  '<header>' +
+	    '<h1>' + article.title + '</h1>' +
+	    '<section>' +
+	      '<p>' +
+		[
+		  '<span><a href="https://doi.org/' + article.doi + '">' + article.doi + '</a></span>' ,
+		  '<span>' + article.journal + '</span>'
+		].join( '<br>' ) +
+	      '</p>' +
+	    '</section>' +
+	  '</header>' +
+// 	  '<img src="' + publisherIcon[ article.journal ] + '">' +
+	  '<main>' +
+	    article.abstract +
+	  '</main>'+
+	'</div>' )
+      
+    } ).join( '' ) )
+    
+    $( '#genera' ).append( Object.keys( data.genus ).slice( 0, genera ).map( function ( genus ) {
+      var genusData = data.genus[ genus ]
+      
+      return (
+	'<div class="card" tabindex="-1" data-articles="' +
+	  genusData.hits.map( function ( v ) { return v[ 0 ] } ).join( ' ' ) +
+	'" >' +
+	  '<header>' +
+	    '<h1>' +
+	      '<span class="title">' + genus + '</span>' +
+	      '<span class="total">' + genusData.total + '</span>' +
+	    '</h1>' +
+	    '<section>' +
+	      '<ul>' +
+		( genusData.species.length ? '<li>' + genusData.species.join( '</li><li>' ) + '</li>' : '' ) +
+	      '</ul>' +
+	    '</section>' +
+	  '</header>' +
+	  '<main>' +
+	    '<ul>' +
+	      genusData.hits.map( function ( v ) {
+		return (
+		  '<li>' +
+		    '<span class="pmcid">' + v[ 0 ] + '</span>' +
+		    '<span class="count">' + v[ 1 ] + '</span>' +
+		  '</li>' )
+	      } ).join( '' ) +
+	    '</ul>' +
+	  '</main>' +
+	'</div>' )
+      
+    } ).join( '' ) )
+    
+    $( '#species' ).append( Object.keys( data.binomial ).slice( 0, binomial ).map( function ( species ) {
+      var speciesData = data.binomial[ species ]
+      
+      return (
+	'<div class="card" tabindex="-1" data-articles="' +
+	  speciesData.hits.map( function ( v ) { return v[ 0 ] } ).join( ' ' ) +
+	'" >' +
+	  '<header>' +
+	    '<h1>' +
+	      '<span class="title">' + species + '</span>' +
+	      '<span class="total">' + speciesData.total + '</span>' +
+	    '</h1>' +
+	    '<section>' +
+	      '<ul>' +
+	      '</ul>' +
+	    '</section>' +
+	  '</header>' +
+	  '<main>' +
+	    '<ul>' +
+	      speciesData.hits.map( function ( v ) {
+		return (
+		  '<li>' +
+		    '<span class="pmcid">' + v[ 0 ] + '</span>' +
+		    '<span class="count">' + v[ 1 ] + '</span>' +
+		  '</li>' )
+	      } ).join( '' ) +
+	    '</ul>' +
+	  '</main>' +
+	'</div>' )
+      
+    } ).join( '' ) )
+    
+  });
+  
+  $( 'body > main > article > section' ).addClass('shadow shadow-top').scroll( function () {
+    var $this = $(this);
+    
+    $this[ ( this.scrollTop < 5 ? 'add' : 'remove' ) + 'Class' ]('shadow-top')
+    $this[ ( this.scrollHeight - this.clientHeight - this.scrollTop < 5 ? 'add' : 'remove' ) + 'Class' ]('shadow-bottom')
+  } )
+});
+    </script>
+  </body>
+</html>
