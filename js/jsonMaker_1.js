@@ -23,12 +23,15 @@ var data    = JSON.parse( fs.readFileSync( input, 'utf8' ) )
 // - articles
 Object.keys( data.articles ).forEach( function ( article ) {
   var metadata = data.articles[ article ].metadata
+    , amires   = data.articles[ article ].AMIResults
   
   out.articles[ article ] = {
     title    : metadata.title,
     doi      : metadata.doi,
-    abstract : metadata.abstractText || '' ,
-    journal  : metadata.journalInfo[ 0 ].journal[ 0 ].title[ 0 ]
+    abstract : metadata.abstractText || '',
+    journal  : metadata.journalInfo[ 0 ].journal[ 0 ].title[ 0 ],
+    species  : ( amires.binomial || [] ).map( function ( v ) { return v.match } ),
+    genera   : ( amires.genus || [] ).map( function ( v ) { return v.match } )
   }
 } )
 
@@ -129,8 +132,23 @@ Object.keys( data.binomial ).forEach( function ( species ) {
 } )
 
 // Sorting
-Object.keys( out.genus ).forEach( function ( v ) {
+var genusKeys = Object.keys( out.genus )
+  , binomialKeys = Object.keys( out.binomial )
+
+genusKeys.forEach( function ( v ) {
   out.genus[ v ].species = out.genus[ v ].species.sort()
+} )
+
+genusKeys.sort( function ( b, a ) {
+  return ( out.genus[ a ].total - out.genus[ b ].total )
+} ).forEach( function ( v, i ) {
+  out.genus[ v ].order = i;
+} )
+
+binomialKeys.sort( function ( b, a ) {
+  return ( out.binomial[ a ].total - out.binomial[ b ].total )
+} ).forEach( function ( v, i ) {
+  out.binomial[ v ].order = i;
 } )
 
 // Saving file
