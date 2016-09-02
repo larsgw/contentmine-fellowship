@@ -1,0 +1,200 @@
+@charset "utf-8";
+
+html {
+  background-color:#e8e8e8;
+  
+  color: rgba(0, 0, 0, .87);
+}
+
+body {
+  position:absolute;
+  top:64px;left:0;right:0;bottom:16px;
+  margin:0;padding-top:16px;
+}
+
+body > header {
+  position:fixed;
+  top:0;left:0;right:0;
+  height:64px;
+  background-color:#607D8B;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+body > main {
+  position:relative;
+  height:100%;max-width:900px;
+  
+  margin:0 auto;
+  
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+
+h1 {
+  margin:8px 0;
+  font-weight:400;
+  font-size:45px;
+}
+
+
+h2 {
+  margin:8px 0;
+  font-weight:400;
+  font-size:34px;
+}
+
+h4 {
+  margin:8px 0;
+  font-weight:400;
+  font-size:20px;
+}
+
+nav ul {
+  padding:0;margin:0;
+  list-style:none;
+}
+
+a, a:visited {
+  color: black;
+}
+
+p {
+  margin:8px 0;
+}
+
+nav tr td {
+  border-left: 1px solid rgba(0,0,0,.12);
+  padding-left:8px;
+}
+
+hr {
+  border:0;
+  height:1px;
+  background-color: rgba(0,0,0,.12);
+}
+
+.card {
+  position: absolute;
+  padding:16px;
+  margin:8px;
+  
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+    
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(0,0,0,.87);
+  font-family: Roboto;
+  
+  float:left;
+}
+
+/*.card header {  }*/
+
+  .card header h1 {
+    font-weight:normal;
+    font-size:16px;
+    overflow:hidden;
+    margin:0;
+    
+    white-space:nowrap;
+  }
+  
+    #articles header h1 { white-space:initial; }
+
+  /*.card header section {  }*/
+
+    .card header section {
+      margin:8px 0 0 0;
+      color:rgba(0,0,0,.54);
+      font-size:14px;
+      font-weight:300;
+    }
+    
+      .card header section ul {
+	padding:0;
+	margin:0;
+	list-style-type:none;
+	line-height: 1.25em;
+      }
+      
+      .card header section ul li:before {
+	content:'\251C\2500';
+	margin:0 8px 0 0;
+      }
+      
+      .card header section ul li:last-child:before {
+	content:'\2514\2500';
+      }
+
+      .card header section a {
+	color:inherit
+      }
+
+.card main {
+  margin:8px 0 0 0;
+  overflow:hidden;
+  font-size:14px;
+  font-weight:300;
+  line-height:1.2em;
+}
+
+  .card main ul {
+    padding:0 0 0 20px;
+    margin:0;
+    line-height:1.5em;
+  }
+
+/* Boring, more or less default styling */
+
+*, *:before, *:after {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -ms-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+::-webkit-scrollbar { width: 7px;height: 7px; }
+::-webkit-scrollbar-button { width: 0;height: 0; }
+::-webkit-scrollbar-thumb {
+  background-color:rgba(0,0,0,.3);
+  background-clip: padding-box;
+  border: solid transparent;
+  border-width: 0 2px;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover { background-color:rgba(0,0,0,.5); }
+::-webkit-scrollbar-thumb:active { background-color:rgba(0,0,0,.6); }
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0px none #666666;
+  border-radius: 0;
+}
+::-webkit-scrollbar-track:hover { background: transparent; }
+::-webkit-scrollbar-track:active { background: transparent; }
+::-webkit-scrollbar-corner { background: transparent; }
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v17/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+
+.material-icons,
+.material-icons-before:before,
+.material-icons-after:after {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

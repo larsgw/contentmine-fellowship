@@ -7,18 +7,19 @@
     <style>*{}</style>
     
     <!-- Fonts -->
-<!--     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300&subset=latin,greek,latin-ext' rel='stylesheet' type='text/css'> -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300&subset=latin,greek,latin-ext' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700&subset=latin,greek,latin-ext" rel="stylesheet">
     
     <!-- Main -->
-    <link href="../css/card_c03-c.css" rel="stylesheet">
+    <link href="../css/card_c03-d.css" rel="stylesheet">
   </head>
   <body>
     
     <header>
-      <div id="searchBar">
+      <div id="searchBar" tabindex="-1">
+	<span class="material-icons" tabindex="-1">search</span>
 	<input type="text" placeholder="Search for PMCID, genus or species"/>
-	<span class="material-icons">search</span>
+	<span class="material-icons" tabindex="-1">close</span>
       </div>
     </header>
     
@@ -55,9 +56,9 @@ var publisherIcon = {
   'PloS one':'https://plos.org/images/favicon.ico'
 }
 
-var articles = 50
-  , genera   = 50
-  , binomial = 50
+var articles = undefined//50
+  , genera   = undefined//50
+  , binomial = undefined//50
   
   , getdata
   , sections
