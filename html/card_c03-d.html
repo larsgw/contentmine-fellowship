@@ -56,15 +56,45 @@ var publisherIcon = {
   'PloS one':'https://plos.org/images/favicon.ico'
 }
 
-var articles = undefined//50
-  , genera   = undefined//50
-  , binomial = undefined//50
+var articles = 50
+  , genera   = 250
+  , binomial = 250
   
   , getdata
   , sections
+  , uri = getURI()
 
 var stylesheets = {
   filter: document.styleSheets[ 0 ]
+}
+
+function getURI () {
+  var res   = {}
+    , param = window.location.hash.replace( /^#/, '' )
+    
+  if ( param )
+    param = param.split( '&' )
+  
+  else
+    param = [];
+    
+  for ( var i = 0; i < param.length; i++ )
+    res[ param[ i ].split( '=' )[ 0 ] ] = decodeURIComponent( param[ i ].split( '=' )[ 1 ] );
+  
+  return res
+}
+
+function checkHash () {
+  uri = getURI ()
+  
+  if ( uri.article )
+    filter( uri.article, 'articles' )
+  
+  else if ( uri.genus )
+    filter( uri.genus, 'genus' )
+  
+  else if ( uri.species )
+    filter( uri.species, 'species' )
 }
 
 function filter ( value, prop ) {
@@ -82,6 +112,8 @@ function filter ( value, prop ) {
 
 $(document).ready(function(){
   sections = $( 'body > main > section' ).addClass('shadow-top');
+  
+  checkHash()
 })
 
 $(window).on('load',function(){
@@ -106,7 +138,7 @@ $(window).on('load',function(){
 	  'data-species="' + article.species.map( function ( v ) { return v.replace( ' ', '_' ) } ).join( ' ' ) + '"' +
 	'>' +
 	  '<header>' +
-	    '<h1>' + article.title + '</h1>' +
+	    '<h1><a href="#article=' + v + '">' + article.title + '</a></h1>' +
 	    '<section>' +
 	      '<p>' +
 		[
@@ -141,12 +173,25 @@ $(window).on('load',function(){
 	'>' +
 	  '<header>' +
 	    '<h1>' +
-	      '<span class="title">' + genus + '</span>' +
+	      '<span class="title"><a href="#genus=' + genus + '">' + genus + '</a></span>' +
 	      '<span class="total">' + genusData.total + '</span>' +
 	    '</h1>' +
 	    '<section>' +
 	      '<ul>' +
-		( genusData.species.length ? '<li>' + genusData.species.join( '</li><li>' ) + '</li>' : '' ) +
+		genusData.species.map( function ( v, i, a ) {
+		  var str = '<li><a href="#species=' + v.replace( ' ', '_' ) + '">' + v + '</a></li>'
+		  
+		  if ( ( a.length > 10 ) && ( i === 8 ) )
+		    str += (
+		      '<li class="read-more" onclick="' +
+			'this.parentNode.style.maxHeight=\'24.285714285714285em\';' +
+			'this.parentNode.style.overflowY=\'scroll\';' +
+			'this.remove()' +
+		      '">Click for more species</li>'
+		    )
+		  
+		  return str
+		} ).join( ' ' ) +
 	      '</ul>' +
 	    '</section>' +
 	  '</header>' +
@@ -155,7 +200,7 @@ $(window).on('load',function(){
 	      genusData.hits.map( function ( v ) {
 		return (
 		  '<li>' +
-		    '<span class="pmcid">' + v[ 0 ] + '</span>' +
+		    '<span class="pmcid"><a href="#article=' + v[ 0 ] + '">' + v[ 0 ] + '</a></span>' +
 		    '<span class="count">' + v[ 1 ] + '</span>' +
 		  '</li>' )
 	      } ).join( '' ) +
@@ -182,7 +227,7 @@ $(window).on('load',function(){
 	'>' +
 	  '<header>' +
 	    '<h1>' +
-	      '<span class="title">' + species + '</span>' +
+	      '<span class="title"><a href="#species=' + species.replace( ' ', '_' ) + '">' + species + '</a></span>' +
 	      '<span class="total">' + speciesData.total + '</span>' +
 	    '</h1>' +
 	    '<section>' +
@@ -195,15 +240,22 @@ $(window).on('load',function(){
 	      speciesData.hits.map( function ( v ) {
 		return (
 		  '<li>' +
-		    '<span class="pmcid">' + v[ 0 ] + '</span>' +
+		    '<span class="pmcid"><a href="#article=' + v[ 0 ] + '">' + v[ 0 ] + '</a></span>' +
 		    '<span class="count">' + v[ 1 ] + '</span>' +
 		  '</li>' )
 	      } ).join( '' ) +
 	    '</ul>' +
 	  '</main>' +
+	  '<footer>' +
+	    '<a href="#genus=' + species.split( ' ' )[ 0 ] + '">' + species.split( ' ' )[ 0 ] + '</a>' +
+	  '</footer>' +
 	'</div>' )
       
     } ).join( '' ) )
+    
+    $( '.card a' ).click( function () {
+      setTimeout( checkHash, 100 )
+    } )
     
   });
   

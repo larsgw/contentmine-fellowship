@@ -157,6 +157,10 @@ body > main {
   
   cursor:pointer;
 }
+    
+  .card a         { color: inherit; }
+  .card a:visited { color: inherit; }
+  .card a:hover   { color: #2196F3; }
 
   .card:focus {
     outline:none;
@@ -169,17 +173,6 @@ body > main {
     #articles .card       main { max-height: 12.7em; }
     #articles .card:focus main { max-height:  500px; }
 
-.card img {
-  display:none;
-  
-  position:absolute;
-  top:16px;
-  right:16px;
-  width:56px;
-  height:56px;
-  object-fit:contain;
-}
-
 /*.card header {  }*/
 
   .card header h1 {
@@ -191,7 +184,9 @@ body > main {
     white-space:nowrap;
   }
   
-    #articles header h1 { white-space:initial; }
+    #articles .card header h1 { white-space:initial; }
+    
+    .card header h1 a { text-decoration: none; }
 
   /*.card header section {  }*/
 
@@ -207,11 +202,20 @@ body > main {
 	margin:0;
 	list-style-type:none;
 	line-height: 1.25em;
+	max-height: 12.142857142857142em;
+	overflow: hidden;
       }
+      
+      .card header section ul li a { text-decoration: none; }
       
       .card header section ul li:before {
 	content:'\251C\2500';
 	margin:0 8px 0 0;
+      }
+      
+      .card header section ul li.read-more:before {
+	content:'\255E';
+	margin-right:18px;
       }
       
       .card header section ul li:last-child:before {
@@ -235,6 +239,14 @@ body > main {
     margin:0;
     line-height:1.5em;
   }
+
+.card footer {
+  text-align: right;
+  color: rgba(0, 0, 0, .54);
+  font-size: 14px;
+}
+
+  .card footer a { text-decoration: none; }
 
 span.total:before,
 span.count:before { content:' - '  ; }
