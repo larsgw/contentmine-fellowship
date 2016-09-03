@@ -13,37 +13,40 @@
     <!-- Main -->
     <link href="../css/card_c03-d.css" rel="stylesheet">
   </head>
-  <body>
-    
-    <header>
-      <div id="searchBar" tabindex="-1">
-	<span class="material-icons" tabindex="-1">search</span>
-	<input type="text" placeholder="Search for PMCID, genus or species"/>
-	<span class="material-icons" tabindex="-1">close</span>
-      </div>
-    </header>
+  <body class="shadow-top">
     
     <main>
       
-      <section id="articles">
+      <section id="articles" class="shadow-top s-list">
 	<header>Articles</header>
 	<main></main>
 	<footer></footer>
       </section>
       
-      <section id="genera">
+      <section id="genus" class="shadow-top s-list">
 	<header>Genus</header>
 	<main></main>
 	<footer></footer>
       </section>
       
-      <section id="species">
+      <section id="species" class="shadow-top s-list">
 	<header>Species</header>
 	<main></main>
 	<footer></footer>
       </section>
       
     </main>
+    
+    <header>
+      <div id="backButton">
+	<span class="material-icons">arrow_back</span>
+      </div>
+      <div id="searchBar" tabindex="-1">
+	<span class="material-icons" tabindex="-1">search</span>
+	<input type="text" placeholder="Search for PMCID, genus or species"/>
+	<span class="material-icons" tabindex="-1">close</span>
+      </div>
+    </header>
   
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <!--     <script type="text/javascript" src="https://larsgw.github.io/citation.js/src/Citation-0.1.js"></script> -->
@@ -57,8 +60,8 @@ var publisherIcon = {
 }
 
 var articles = 50
-  , genera   = 250
-  , binomial = 250
+  , genera   = 50
+  , binomial = 50
   
   , getdata
   , sections
@@ -87,31 +90,63 @@ function getURI () {
 function checkHash () {
   uri = getURI ()
   
-  if ( uri.article )
-    filter( uri.article, 'articles' )
+  if ( uri.articles )
+    filter( uri.articles, 'articles' )
   
   else if ( uri.genus )
     filter( uri.genus, 'genus' )
   
   else if ( uri.species )
     filter( uri.species, 'species' )
+  
+  else
+    $( 'body' ).addClass( 'shadow-top shadow-bottom' )
 }
 
 function filter ( value, prop ) {
   var prop = prop || 'articles';
+  
+  window.location.hash = '#' + prop + '=' + value
+  
+  $( 'body' )
+    .addClass( 'shadow-top' )
+    .removeClass( 'shadow-bottom' )
+  .children( 'main' )
+    .addClass( 's-details' )
+  .children( 'section' )
+    .removeClass( 's-item' )
+    .addClass( 's-list' )
+  .filter( '#' + prop )
+    .removeClass( 's-list' )
+    .addClass( 's-item' )
+  
   stylesheets.filter.deleteRule( 0 )
   stylesheets.filter.insertRule( 
-    '.card:not([data-' + prop + '~="' + value + '"]){' +
+    'body > main > section > main > .card:not([data-' + prop + '~="' + value + '"]){' +
       'max-height:0;' +
       'margin-top:0;' +
       'margin-bottom:0;' +
       'padding:0;' +
+      'overflow:hidden;' +
     '}'
   , 0 )
 }
 
+function clearFilter () {
+  window.location.hash = '';
+  $( 'body' )
+    .addClass( 'shadow-top shadow-bottom' )
+  .children( 'main' )
+    .removeClass( 's-details' )
+  .children( 'section' )
+    .removeClass( 's-item' )
+    .addClass( 's-list' )
+  stylesheets.filter.deleteRule( 0 )
+  stylesheets.filter.insertRule( '*{}', 0 )
+}
+
 $(document).ready(function(){
-  sections = $( 'body > main > section' ).addClass('shadow-top');
+  sections = $( 'body > main > section' )
   
   checkHash()
 })
@@ -138,16 +173,30 @@ $(window).on('load',function(){
 	  'data-species="' + article.species.map( function ( v ) { return v.replace( ' ', '_' ) } ).join( ' ' ) + '"' +
 	'>' +
 	  '<header>' +
-	    '<h1><a href="#article=' + v + '">' + article.title + '</a></h1>' +
+	    '<h1><a href="#articles=' + v + '">' + article.title + '</a></h1>' +
+	  '</header>' +
+	  '<aside>' +
 	    '<section>' +
 	      '<p>' +
 		[
+		  '<span>' + article.authors + '</span>' ,
 		  '<span><a href="https://doi.org/' + article.doi + '">' + article.doi + '</a></span>' ,
 		  '<span>' + article.journal + '</span>'
-		].join( '<br>' ) +
+		].join( '' ) +
 	      '</p>' +
 	    '</section>' +
-	  '</header>' +
+	    '<section class="hide">' +
+	      '<p style="cursor:pointer;margin:8px 0 16px 0;" class="anchor" onclick="' +
+		'var $self=$(this),iframe=this' +
+		  '.parentNode' +
+		  '.insertBefore(document.createElement(\'iframe\'),this);' +
+		'iframe.setAttribute(\'src\',\'wordcloud_2.html?pmcid=' + v + '\');' +
+		'iframe.style.marginBottom=\'16px\';'+
+		'$self.remove();' +
+	      '">' + 'Click to load Word Cloud' + '</p>' +
+	      '<p>Word Cloud created with <a href="https://www.jasondavies.com/wordcloud/">cloud.js</a> (<a href="https://github.com/jasondavies/d3-cloud">repo</a>, <a href="https://github.com/jasondavies/d3-cloud/blob/master/LICENSE">license</a>)</p>' +
+	    '</section>' +
+	  '</aside>' +
 // 	  '<img src="' + publisherIcon[ article.journal ] + '">' +
 	  '<main>' +
 	    article.abstract +
@@ -156,9 +205,9 @@ $(window).on('load',function(){
       
     } ).join( '' ) )
     
-    $( '#genera > main' ).append( Object.keys( data.genus ).slice( 0, genera ).map( function ( genus, index ) {
+    $( '#genus > main' ).append( Object.keys( data.genus ).slice( 0, genera ).map( function ( genus, index ) {
       var genusData = data.genus[ genus ]
-        , footer  = $( '#genera > footer' )
+        , footer  = $( '#genus > footer' )
       
       if ( index < genera )
 	footer.html( index + '/' + genera )
@@ -176,6 +225,8 @@ $(window).on('load',function(){
 	      '<span class="title"><a href="#genus=' + genus + '">' + genus + '</a></span>' +
 	      '<span class="total">' + genusData.total + '</span>' +
 	    '</h1>' +
+	  '</header>' +
+	  '<aside>' +
 	    '<section>' +
 	      '<ul>' +
 		genusData.species.map( function ( v, i, a ) {
@@ -184,9 +235,8 @@ $(window).on('load',function(){
 		  if ( ( a.length > 10 ) && ( i === 8 ) )
 		    str += (
 		      '<li class="read-more" onclick="' +
-			'this.parentNode.style.maxHeight=\'24.285714285714285em\';' +
-			'this.parentNode.style.overflowY=\'scroll\';' +
-			'this.remove()' +
+			'this.parentNode.className+=\'open\';' +
+			'this.remove();' +
 		      '">Click for more species</li>'
 		    )
 		  
@@ -194,13 +244,13 @@ $(window).on('load',function(){
 		} ).join( ' ' ) +
 	      '</ul>' +
 	    '</section>' +
-	  '</header>' +
+	  '</aside>' +
 	  '<main>' +
 	    '<ul>' +
 	      genusData.hits.map( function ( v ) {
 		return (
 		  '<li>' +
-		    '<span class="pmcid"><a href="#article=' + v[ 0 ] + '">' + v[ 0 ] + '</a></span>' +
+		    '<span class="pmcid"><a href="#articles=' + v[ 0 ] + '">' + v[ 0 ] + '</a></span>' +
 		    '<span class="count">' + v[ 1 ] + '</span>' +
 		  '</li>' )
 	      } ).join( '' ) +
@@ -230,17 +280,19 @@ $(window).on('load',function(){
 	      '<span class="title"><a href="#species=' + species.replace( ' ', '_' ) + '">' + species + '</a></span>' +
 	      '<span class="total">' + speciesData.total + '</span>' +
 	    '</h1>' +
+	  '</header>' +
+	  '<aside>' +
 	    '<section>' +
 	      '<ul>' +
 	      '</ul>' +
 	    '</section>' +
-	  '</header>' +
+	  '</aside>' +
 	  '<main>' +
 	    '<ul>' +
 	      speciesData.hits.map( function ( v ) {
 		return (
 		  '<li>' +
-		    '<span class="pmcid"><a href="#article=' + v[ 0 ] + '">' + v[ 0 ] + '</a></span>' +
+		    '<span class="pmcid"><a href="#articles=' + v[ 0 ] + '">' + v[ 0 ] + '</a></span>' +
 		    '<span class="count">' + v[ 1 ] + '</span>' +
 		  '</li>' )
 	      } ).join( '' ) +
@@ -266,6 +318,13 @@ $(window).on('load',function(){
     $this[ ( this.scrollHeight - this.clientHeight - this.scrollTop < 5 ? 'add' : 'remove' ) + 'Class' ]('shadow-bottom')
   } )
   
+  $( 'body' ).children('main').scroll( function () {
+    var $this = $(this).parent();
+    
+    $this[ ( this.scrollTop < 5 ? 'add' : 'remove' ) + 'Class' ]('shadow-top')
+    $this[ ( this.scrollHeight - this.clientHeight - this.scrollTop < 5 ? 'add' : 'remove' ) + 'Class' ]('shadow-bottom')
+  } )
+  
   $('#searchBar input').on('change',function(){
     var val = $(this).val();
     
@@ -278,6 +337,9 @@ $(window).on('load',function(){
     else
       filter(val,'genus')
   })
+  
+  $('#backButton span').on('click',clearFilter)
+  
 });
     </script>
   </body>

@@ -27,6 +27,7 @@ Object.keys( data.articles ).forEach( function ( article ) {
   
   out.articles[ article ] = {
     title    : metadata.title,
+    authors  : metadata.authorString,
     doi      : metadata.doi,
     abstract : metadata.abstractText || '',
     journal  : metadata.journalInfo[ 0 ].journal[ 0 ].title[ 0 ],

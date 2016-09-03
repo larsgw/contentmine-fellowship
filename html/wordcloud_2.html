@@ -1,0 +1,59 @@
+<html>
+  <head></head>
+  <body style="margin:0;">
+  
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    
+    <script src="../js/cloud.js"></script>
+    
+    <script>
+var cloud = d3.layout.cloud
+  , fill  = d3.scale .category20()
+  , uri   = (function getURI () {
+      var res = {} , param = window.location.href.split('?').pop()
+      if ( param ) param = param.split( '&' );
+      else param = [];
+      for ( var i = 0; i < param.length; i++ ) res[ param[ i ].split( '=' )[ 0 ] ] = decodeURIComponent( param[ i ].split( '=' )[ 1 ] );
+      return res;
+    })()
+  , layout = cloud()
+    .size([innerWidth, innerHeight])
+    .padding(1)
+    .rotate(function() { return ~~(Math.random() * 2) * 90; })
+    .font("Impact")
+    .fontSize(function(d) { return Math.sqrt( d.size * (innerWidth / 100) ); })
+    .on("end", draw);
+
+function draw(words) {
+  d3.select("body").append("svg")
+      .attr("width", layout.size()[0])
+      .attr("height", layout.size()[1])
+    .append("g")
+      .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+    .selectAll("text")
+      .data(words)
+    .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .style("fill", function(d, i) { return fill(i); })
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+}
+
+$.get( '../data/data.json', function( data, err ){
+	  
+  var frequencies = data.articles[ uri.pmcid ].AMIResults.frequencies
+    , words       = frequencies.map( function ( v ) {
+    return { text: v.word, size: v.count }
+  } )
+  
+  layout.words(words).start();
+  
+});
+    </script>
+  </body>
+</html>
