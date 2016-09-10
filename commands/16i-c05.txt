@@ -108,3 +108,9 @@ larsw@debian:~/public_html/cm-repo/data/1$ node ~/public_html/ctj/ctj.js -p . -o
       [==============================] Parsing directory 497/497: PMC4995799 (eta 0.0s)
  248: [INFO ] Saving output...
  256: [INFO ] Saving output succeeded!
+
+larsw@debian:~/public_html/cm-repo/data/1$ cd ../../
+
+larsw@debian:~/public_html/cm-repo$ node js/c05-words.js 
+
+larsw@debian:~/public_html/cm-repo$ node js/c05.js
