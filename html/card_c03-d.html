@@ -18,19 +18,34 @@
     <main>
       
       <section id="articles" class="shadow-top s-list">
-	<header>Articles</header>
+	<header>Articles
+	  <nav class="sort">
+	    <span class="material-icons">arrow_drop_up</span>
+	    <span class="material-icons">arrow_drop_down</span>
+	  </nav>
+	</header>
 	<main></main>
 	<footer></footer>
       </section>
       
       <section id="genus" class="shadow-top s-list">
-	<header>Genus</header>
+	<header>Genus
+	  <nav class="sort">
+	    <span class="material-icons">arrow_drop_up</span>
+	    <span class="material-icons">arrow_drop_down</span>
+	  </nav>
+	</header>
 	<main></main>
 	<footer></footer>
       </section>
       
       <section id="species" class="shadow-top s-list">
-	<header>Species</header>
+	<header>Species
+	  <nav class="sort">
+	    <span class="material-icons">arrow_drop_up</span>
+	    <span class="material-icons">arrow_drop_down</span>
+	  </nav>
+	</header>
 	<main></main>
 	<footer></footer>
       </section>
@@ -190,7 +205,7 @@ $(window).on('load',function(){
 		'var $self=$(this),iframe=this' +
 		  '.parentNode' +
 		  '.insertBefore(document.createElement(\'iframe\'),this);' +
-		'iframe.setAttribute(\'src\',\'wordcloud_2.html?pmcid=' + v + '\');' +
+		'iframe.setAttribute(\'src\',\'wordcloud_2.html?file=..%2fdata%2fdata.json&pmcid=' + v + '\');' +
 		'iframe.style.marginBottom=\'16px\';'+
 		'$self.remove();' +
 	      '">' + 'Click to load Word Cloud' + '</p>' +
@@ -339,6 +354,19 @@ $(window).on('load',function(){
   })
   
   $('#backButton span').on('click',clearFilter)
+  
+  $( 'body > main > section > header nav' ).click( function () {
+    var parent = $( this ).parents( 'body > main > section' )
+      , column = parent.hasClass( 'column' )
+      , columnr = parent.hasClass( 'column-reverse' )
+    
+    parent.removeClass( 'column column-reverse' )
+    
+    if ( column )
+      parent.addClass( 'column-reverse' )
+    else if ( !columnr )
+      parent.addClass( 'column' )
+  } )
   
 });
     </script>

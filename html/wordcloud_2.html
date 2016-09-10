@@ -44,7 +44,7 @@ function draw(words) {
       .text(function(d) { return d.text; });
 }
 
-$.get( '../data/data.json', function( data, err ){
+$.get( uri.file, function( data, err ){
 	  
   var frequencies = data.articles[ uri.pmcid ].AMIResults.frequencies
     , words       = frequencies.map( function ( v ) {

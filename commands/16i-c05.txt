@@ -1,0 +1,110 @@
+Commands dump from project 16i-c05.
+
+2016-09-10 01:32 UTC+2
+
+larsw@debian:~/public_html/cm-repo$ mkdir data/1
+
+larsw@debian:~/public_html/cm-repo$ cd data/1/
+
+larsw@debian:~/public_html/cm-repo/data/1$ getpapers -q ABSTRACT:zika ABSTRACT:dengue ABSTRACT:spondweni -n
+info: Searching using eupmc API
+info: Running in no-execute mode, so nothing will be downloaded
+info: Found 139 open access results
+
+larsw@debian:~/public_html/cm-repo/data/1$ getpapers -q 'ABSTRACT:zika OR ABSTRACT:dengue OR ABSTRACT:spondweni' -n
+info: Searching using eupmc API
+info: Running in no-execute mode, so nothing will be downloaded
+info: Found 1373157 open access results
+
+larsw@debian:~/public_html/cm-repo/data/1$ getpapers -q 'ABSTRACT:zika OR ABSTRACT:dengue OR ABSTRACT:spondweni' -k 500 -x
+info: Searching using eupmc API
+error: No output directory given. You must provide the --outdir argument.
+
+larsw@debian:~/public_html/cm-repo/data/1$ getpapers -q 'ABSTRACT:zika OR ABSTRACT:dengue OR ABSTRACT:spondweni' -k 500 -x -o .
+info: Searching using eupmc API
+info: Found 1373157 open access results
+info: Limiting to 500 hits
+Retrieving results [==============================] 100% (eta 0.0s)
+info: Done collecting results
+info: Duplicate records found: 497 unique results identified
+info: Saving result metadata
+info: Full EUPMC result metadata written to eupmc_results.json
+info: Individual EUPMC result metadata records written
+info: Extracting fulltext HTML URL list (may not be available for all articles)
+info: Fulltext HTML URL list written to eupmc_fulltext_html_urls.txt
+warn: Article with pmcid "PMC4993616" was not Open Access (therefore no XML)
+warn: Article with pmcid "PMC4995799" was not Open Access (therefore no XML)
+warn: Article with pmcid "PMC4943480" was not Open Access (therefore no XML)
+info: Got XML URLs for 494 out of 497 results
+info: Downloading fulltext XML files
+Downloading files [==============================] 100% (494/494) [8.7s elapsed, eta 0.0]
+info: All downloads succeeded!
+
+larsw@debian:~/public_html/cm-repo/data/1$ norma --project . -i fulltext.xml -o scholarly.html --transform nlm2html                                           
+....UNKNOWN: isbn: 9241542098
+UNKNOWN: isbn: 978-92-9022-387-0
+....UNKNOWN: alt-text: Table
+......UNKNOWN: page-range: 3–11, 76–9
+.UNKNOWN: isbn: 978-953-51-0050-8
+....UNKNOWN: issn-l: 1043-3155
+.UNKNOWN: prefix: St
+.....UNKNOWN: preformat: 
+                        
+                                                                                                                           ircigvsnrd
+301 fvegmsggtw vdvvlehggc vtvmaqdkpt vdielvtttv snmaevrsyc yeasisdmas
+361 dsrcptqgea yldkqsdtqy vckrtlvdrg wgngcglfgk gslvtcakfa cskkmtgksi
+421 qpenleyrim lsvhgsqhsg mivndtghet denrakveit pnspraeatl ggfgslgldc
+481 eprtgldfsd lyyltmnnkh wlvhkewfhd iplpwhagad tgtphwnnke alvefkdaha
+541 krqtvvvlgs qegavhtala galeaemdga kgrlssghlk crlkmdklrl kgvsyslcta
+601 aftftkipae tlhgtvtvev qyagtdgpck vpaqmavdmq tltpvgrlit anpviteste
+661 nskmmleldp pfgdsyivig vgekkithhw hrsgsti
+                    
+............UNKNOWN: alt-text: Image 1
+...UNKNOWN: array: BIVABioimpedance vector analysisBMIBody mass indexECFExtracellular fluidICFIntracellular fluid
+..!...UNKNOWN: array: EXPO 2015Universal Exhibition 2015MBDsMosquito-borne diseasesDENVDengue virusCHIKVChikungunya virusWNVWest Nile virusCDCCentre for Disease ControlBGBiogents
+UNKNOWN: array: DENVDengue virusWHOWorld Health OrganizationGLMGeneralized linear modelLRMLogistic regression modelIRInfection ratesVIVector index
+.UNKNOWN: prefix: de
+UNKNOWN: prefix: van
+UNKNOWN: prefix: de
+UNKNOWN: prefix: du
+.UNKNOWN: alt-text: Table 2
+UNKNOWN: alt-text: Table 3
+UNKNOWN: alt-text: Image 1
+.XREF
+.UNKNOWN: prefix: Prof.
+UNKNOWN: prefix: Dr.
+UNKNOWN: prefix: Dr.
+UNKNOWN: prefix: Dr.
+UNKNOWN: prefix: Dr.
+UNKNOWN: prefix: Dr.
+UNKNOWN: prefix: Dr.
+.!!
+
+larsw@debian:~/public_html/cm-repo/data/1$ ami2-species --project . -i scholarly.html --sp.species --sp.type genus
+..................................................
+
+larsw@debian:~/public_html/cm-repo/data/1$ ami2-species --project . -i scholarly.html --sp.species --sp.type binomial
+..................................................
+
+larsw@debian:~/public_html/cm-repo/data/1$ ami2-word --project . --w.words wordFrequencies --w.stopwords stopwords.txt 
+0    [main] DEBUG org.xmlcml.ami2.wordutil.WordSetWrapper  - symbol expands to: /org/xmlcml/ami2/wordutil/stopwords.txt
+..........................................47854 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./PMC4943480
+!47855 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!........54406 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./PMC4993616
+!54406 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!54476 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./PMC4995799
+!54476 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!54477 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - No scholarlyHtml or PDFTXT: ./target
+!54477 [main] WARN  org.xmlcml.ami2.plugins.word.WordCollectionFactory  - no words found to extract
+!
+
+larsw@debian:~/public_html/cm-repo/data/1$ ami2-sequence --project . --filter file\(\*\*/results.xml\) -o sequencesfiles.xml
+..................................................
+
+larsw@debian:~/public_html/cm-repo/data/1$ node ~/public_html/ctj/ctj.js -p . -o . -c genus,binomial
+ 116: [INFO ] Parsing CProject in folder: .
+ 117: [INFO ] Result will be saved in folder: .
+ 118: [INFO ] AMI results of types: genus, binomial will be saved.
+      [==============================] Parsing directory 497/497: PMC4995799 (eta 0.0s)
+ 248: [INFO ] Saving output...
+ 256: [INFO ] Saving output succeeded!

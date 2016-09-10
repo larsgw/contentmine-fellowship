@@ -355,6 +355,16 @@ span.total {
 
 /* Sorting */
 
+body > main > section > header       { position:relative; }
+
+body > main > section > header > nav { position:absolute;right:0;top:8px; }
+
+body > main > section > header > nav
+                 span.material-icons { display:block;line-height:12px;color:rgba(0,0,0,.38);cursor:pointer; }
+
+body > main > section.column         > header > nav span:nth-child(1),
+body > main > section.column-reverse > header > nav span:nth-child(2) { color:rgba(0,0,0,.87); }
+
 body > main > section > main {
   display: -webkit-box;
   display: -moz-box;
